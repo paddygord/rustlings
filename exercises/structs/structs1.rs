@@ -1,11 +1,18 @@
 // structs1.rs
 // Address all the TODOs to make the tests pass!
 
-struct ColorClassicStruct {
-    // TODO: Something goes here
+struct ColorClassicStruct<'a> {
+    name: &'a str,
+    hex: &'a str,
+}
+impl<'a> Default for ColorClassicStruct<'a> {
+    fn default() -> Self { Self { name: "green", hex: "#00FF00" } }
 }
 
-struct ColorTupleStruct(/* TODO: Something goes here */);
+struct ColorTupleStruct<'a>(&'a str, &'a str);
+impl<'a> Default for ColorTupleStruct<'a> {
+    fn default() -> Self { Self ( "green", "#00FF00" ) }
+}
 
 #[derive(Debug)]
 struct UnitStruct;
@@ -18,6 +25,7 @@ mod tests {
     fn classic_c_structs() {
         // TODO: Instantiate a classic c struct!
         // let green =
+        let green = ColorClassicStruct::default();
 
         assert_eq!(green.name, "green");
         assert_eq!(green.hex, "#00FF00");
@@ -28,6 +36,7 @@ mod tests {
         // TODO: Instantiate a tuple struct!
         // For more fun, use the field initialization shorthand.
         // let green =
+        let green = ColorTupleStruct::default();
 
         assert_eq!(green.0, "green");
         assert_eq!(green.1, "#00FF00");
